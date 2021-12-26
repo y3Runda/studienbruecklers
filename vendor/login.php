@@ -10,7 +10,6 @@ if ( isset($data['do_login']) ) {
     $errors = array();
     $user = R::findOne('users', 'email = ?', [$data['email']]);
     if ( $user ) {
-        // 123
         if ( $user->is_banned == 1 ) {
             if ( $user->status == 1 ) {
                 if (password_verify($data['password'], $user->password)) {
