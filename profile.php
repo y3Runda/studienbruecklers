@@ -27,7 +27,6 @@ if ( isset($data['save-about']) ) {
 }
 
 include 'includes/header.php';
-
 ?>
 
 <div class="container">
@@ -49,7 +48,7 @@ include 'includes/header.php';
         <?php else: ?>
         <?php if ( !(R::findOne('friends', 'friend_1 = ?', [$_SESSION['user']->id])) || !(R::findOne('friends', 'friend_1 = ?', [$_SESSION['user']->id])) ): ?>
         <div class="change-password-btn">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='/addfriend.php?id=<?=$user->id;?>'"><i class="fas fa-user-plus"></i> Добавить в друзья</button>
+            <button type="button" class="btn btn-primary disabled" onclick="window.location.href='/addfriend.php?id=<?=$user->id;?>'"><i class="fas fa-user-plus"></i> Добавить в друзья</button>
         </div>
         <?php endif; ?>
         <?php endif; ?>

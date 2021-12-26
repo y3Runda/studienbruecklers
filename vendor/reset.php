@@ -7,7 +7,7 @@ $data = $_POST;
 if ( !empty($data) ) {
     $user = R::findOne('users', 'email = ?', [$data['email']]);
     $errors = array();
-    if ( $user->is_banned == 1 ) {
+    if ( $user->is_banned == 0 ) {
         if ( $user ) {
             $token = substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyz', 30)), 0, 30);
             $user->token = $token;

@@ -29,8 +29,8 @@ include 'includes/header.php';
         </thead>
         <tbody>
 
-            <?php for ($i = 0; $i < count($users); $i++): ?>
-            <?php if ($users[$i]["id"] == $_SESSION['user']->id): ?>
+            <?php for ( $i = 0; $i < count($users); $i++ ): ?>
+            <?php if ( $users[$i]["id"] == $_SESSION['user']->id ): ?>
                 <tr class="table-active">
                     <td><img src="/public/images/default-photo.jpg" alt="" width="50" height="50"></td>
                     <th scope="row"><a href="/profile.php?id=<?php echo $users[$i]["id"]; ?>"><?php echo $users[$i]["surname"] . ' ' . $users[$i]["name"]; ?></a></th>
@@ -38,7 +38,7 @@ include 'includes/header.php';
                     <td><?php echo speuni($users[$i]["priority1"]); ?></td>
                     <td><?php echo speuni($users[$i]["priority2"]); ?></td>
                 </tr>
-            <?php else: ?>
+            <?php elseif ( $users[$i]["is_banned"] == 0 ): ?>
                 <tr>
                     <td><img src="/public/images/default-photo.jpg" alt="" width="50" height="50"></td>
                     <th scope="row"><a href="/profile.php?id=<?php echo $users[$i]["id"]; ?>"><?php echo $users[$i]["surname"] . ' ' . $users[$i]["name"]; ?></a></th>
