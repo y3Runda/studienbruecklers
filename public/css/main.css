@@ -1,0 +1,173 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+#content {
+    flex: 1 0 auto;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    margin: 100px auto;
+    text-align: center;
+}
+.form-signin input {
+    margin-bottom: 10px;
+}
+
+.br-tlr {
+    border-top-left-radius: 0!important;
+    border-top-right-radius: 0!important;
+}
+.br-blr {
+    border-bottom-right-radius: 0!important;
+    border-bottom-left-radius: 0!important;
+}
+
+.photo {
+    width: 200px;
+    height: 200px;
+}
+.photo img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Profile */
+.top-profile {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.top-profile div {
+    transition: all .3s;
+}
+.photo-settings {
+    background-color: #fff;
+    border: 1px solid var(--bs-gray-400);
+    box-shadow: 5px 5px 5px var(--bs-gray-400);
+    width: 290px;
+    padding: 20px;
+}
+.photo-settings:hover {
+    box-shadow: none;
+}
+.photo-settings .image {
+    width: 250px;
+    height: 250px;
+}
+.photo-settings .image img {
+    width: 100%;
+    height: 100%;
+}
+.change-password-btn, .change-photo-btn {
+    width: 250px;
+    margin-top: 20px;
+}
+.change-password-btn button, .change-photo-btn button {
+    width: 100%;
+}
+.info-settings {
+    width: calc(100% - 270px - 40px);
+    background-color: #fff;
+    border: 1px solid var(--bs-gray-400);
+    box-shadow: 5px 5px 5px var(--bs-gray-400);
+    padding: 20px;
+}
+.info-settings:hover {
+    box-shadow: none;
+}
+.name-bar {
+    width: 100%;
+    background-color: var(--bs-primary);
+    padding: 5px 20px;
+    font-size: 1.5rem;
+}
+.birthdate {
+    margin: 10px 20px;
+    font-size: 1.2rem;
+}
+.universities {
+    margin: 20px 20px;
+}
+.priority {
+    width: 49.5%;
+}
+
+.about-info {
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+.about-info .about {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid var(--bs-gray-400);
+    box-shadow: 5px 5px 5px var(--bs-gray-400);
+    transition: all .3s;
+}
+.about:hover {
+    box-shadow: none;
+}
+.about #telegram_social {
+    margin-right: 20px;
+}
+
+
+.discussion {
+    margin: 20px 20px;
+    padding: 20px 20px;
+    background-color: #fff;
+    border: 1px solid var(--bs-gray-400);
+    box-shadow: 5px 5px 5px var(--bs-gray-400);
+    transition: all .3s;
+}
+.discussion:hover {
+    box-shadow: none;
+}
+
+.friends-info {
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+.friends {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid var(--bs-gray-400);
+    box-shadow: 5px 5px 5px var(--bs-gray-400);
+    transition: all .3s;
+}
+.friends:hover {
+    box-shadow: none;
+}
+.friend {
+    color: black;
+    text-decoration: none;
+    max-width: 170px;
+    padding: 10px;
+    transition: .4s all;
+}
+.friend:hover {
+    cursor: pointer;
+    color: white;
+    background-color: var(--bs-primary);
+    border-radius: 10px;
+}
+.f-photo {
+    width: 150px;
+    height: 150px;
+}
+.f-photo img {
+    width: 100%;
+    height: 100%;
+}
+.f-name {
+    text-align: center;
+}
