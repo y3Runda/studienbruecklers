@@ -11,15 +11,19 @@ if ( isset($data['do_login']) ) {
     $user = R::findOne('users', 'email = ?', [$data['email']]);
     if ( $user ) {
         // 123
-        if ( $user->status == 1 ) {
-            if (password_verify($data['password'], $user->password)) {
-                $_SESSION['user'] = $user;
-                header("Location: /");
+        if ( $user->is_banned == 1 ) {
+            if ( $user->status == 1 ) {
+                if (password_verify($data['password'], $user->password)) {
+                    $_SESSION['user'] = $user;
+                    header("Location: /");
+                } else {
+                    $errors[] = 'Неверный пароль';
+                }
             } else {
-                $errors[] = 'Неверный пароль';
+                $errors[] = 'Аккаунт не подтверждён';
             }
         } else {
-            $errors[] = 'Аккаунт не подтверждён';
+            $errors[] = 'Аккаунт заблокирован';
         }
     } else {
         $errors[] = 'Пользователя с таким e-mail не найдено';

@@ -7,16 +7,20 @@ $data = $_POST;
 if ( !empty($data) ) {
     $user = R::findOne('users', 'email = ?', [$data['email']]);
     $errors = array();
-    if ( $user ) {
-        $token = substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyz', 30)), 0, 30);
-        $user->token = $token;
-        R::store($user);
-        $actual_link = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/change.php?token='.$token;
-        $success = array();
-        mail($data['email'], 'Смена пароля', "Перейдите по ссылке, чтобы сменить пароль: $actual_link");
-        $success[] = 'Письмо отправлено';
+    if ( $user->is_banned == 1 ) {
+        if ( $user ) {
+            $token = substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyz', 30)), 0, 30);
+            $user->token = $token;
+            R::store($user);
+            $actual_link = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/change.php?token='.$token;
+            $success = array();
+            mail($data['email'], 'Смена пароля', "Перейдите по ссылке, чтобы сменить пароль: $actual_link");
+            $success[] = 'Письмо отправлено';
+        } else {
+            $errors[] = "Аккаунта с такой электронной почтой не существует";
+        }
     } else {
-        $errors[] = "Аккаунта с такой электронной почтой не существует";
+        $errors[] = 'Аккаунт заблокирован';
     }
 }
 

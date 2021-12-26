@@ -40,6 +40,7 @@ if ( isset($data['do_signup']) ) {
         $user->password = password_hash($data['password1'], PASSWORD_BCRYPT);
         $user->token = $token;
         $user->status = 0;
+        $user->is_banned = 0;
         $user->about = '';
         $user->telegram = '';
         $user->instagram = '';
