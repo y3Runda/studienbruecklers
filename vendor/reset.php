@@ -12,9 +12,9 @@ if ( !empty($data) ) {
             $token = substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyz', 30)), 0, 30);
             $user->token = $token;
             R::store($user);
-            $actual_link = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/change.php?token='.$token;
+            $actual_link = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/vendor/change.php?token='.$token;
             $success = array();
-            mail($data['email'], 'Смена пароля', "Перейдите по ссылке, чтобы сменить пароль: $actual_link");
+            mail($data['email'], 'Смена пароля',    "Перейдите по ссылке, чтобы сменить пароль: $actual_link", "From: studienbruecklers@snuverse.net\r\n");
             $success[] = 'Письмо отправлено';
         } else {
             $errors[] = "Аккаунта с такой электронной почтой не существует";

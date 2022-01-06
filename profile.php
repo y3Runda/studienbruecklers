@@ -33,30 +33,32 @@ include 'includes/header.php';
     <?php //echo $_GET['id']; ?>
 </div>
 
-<section class="container top-profile d-flex justify-content-between">
+<section class="container top-profile d-flex">
     <div class="photo-settings">
-        <div class="image">
-            <img src="public/images/default-photo.jpg" alt="">
+        <div class="photo-settings-all">
+            <div class="image d-flex justify-content-center">
+                <img src="public/images/default-photo.jpg" alt="">
+            </div>
+            <?php if ( $flag ): ?>
+                <div class="change-photo-btn">
+                    <button type="button" class="btn btn-primary disabled"><i class="fas fa-camera"></i> Изменить фото</button>
+                </div>
+                <div class="change-password-btn">
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='/vendor/reset.php'"><i class="fas fa-key"></i> Изменить пароль</button>
+                </div>
+            <?php else: ?>
+                <?php if ( !(R::findOne('friends', 'friend_1 = ?', [$_SESSION['user']->id])) || !(R::findOne('friends', 'friend_1 = ?', [$_SESSION['user']->id])) ): ?>
+                    <div class="change-password-btn">
+                        <button type="button" class="btn btn-primary disabled" onclick="window.location.href='/addfriend.php?id=<?=$user->id;?>'"><i class="fas fa-user-plus"></i> Добавить в друзья</button>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
-        <?php if ( $flag ): ?>
-        <div class="change-photo-btn">
-            <button type="button" class="btn btn-primary disabled"><i class="fas fa-camera"></i> Изменить фото</button>
-        </div>
-        <div class="change-password-btn">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='/vendor/reset.php'"><i class="fas fa-key"></i> Изменить пароль</button>
-        </div>
-        <?php else: ?>
-        <?php if ( !(R::findOne('friends', 'friend_1 = ?', [$_SESSION['user']->id])) || !(R::findOne('friends', 'friend_1 = ?', [$_SESSION['user']->id])) ): ?>
-        <div class="change-password-btn">
-            <button type="button" class="btn btn-primary disabled" onclick="window.location.href='/addfriend.php?id=<?=$user->id;?>'"><i class="fas fa-user-plus"></i> Добавить в друзья</button>
-        </div>
-        <?php endif; ?>
-        <?php endif; ?>
     </div>
     <div class="info-settings">
         <div class="name-bar text-white"><?php echo $user->name . ' ' . $user->surname; ?></div>
         <div class="birthdate">Дата рождения: <strong><?=$user->birthdate;?></strong></div>
-        <div class="universities d-flex justify-content-between">
+        <div class="universities">
             <div class="priority card border-primary mb-3" style="margin-right: 1%;">
                 <div class="card-header">Приоритет 1</div>
                 <div class="card-body">
@@ -82,7 +84,7 @@ include 'includes/header.php';
         <p class="lead">Напишите о своих хобби, увлечениях.</p>
         <form action="/profile.php?id=<?=$_GET['id']?>" method="post">
             <textarea class="form-control" name="about" id="exampleTextarea" rows="5"><?php echo $user->about; ?></textarea>
-            <div class="d-flex justify-content-between mt-3">
+            <div class="under-text mt-3">
                 <div class="social-networks d-flex justify-content-center mt-2">
                     <div class="form-group" id="telegram_social">
                         <label for="inputTelegram" class="form-label"><i class="fab fa-telegram"></i> Telegram (без @)</label>
@@ -93,8 +95,8 @@ include 'includes/header.php';
                         <input type="text" name="instagram" class="form-control" id="inputInstagram" value="<?php echo $user->instagram; ?>">
                     </div>
                 </div>
-                <div class="align-self-end">
-                    <button type="submit" name="save-about" class="btn btn-primary">Сохранить</button>
+                <div class="align-self-end save-btn">
+                    <button type="submit" name="save-about" class="btn btn-primary"><i class="fas fa-save"></i> Сохранить</button>
                 </div>
             </div>
         </form>

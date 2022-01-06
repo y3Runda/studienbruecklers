@@ -1725,11 +1725,11 @@ class OODBBean implements \IteratorAggregate,\ArrayAccess,\Countable,Jsonable
     /**
      * @var array|bool|mixed|null
      */
-    private mixed $login;
+    //private $login;
     /**
      * @var array|bool|mixed|null
      */
-    private mixed $name;
+    //private $name;
 
     /**
 	 * If fluid count is set to TRUE then $bean->ownCount() will

@@ -46,9 +46,9 @@ if ( isset($data['do_signup']) ) {
         $user->instagram = '';
         R::store($user);
 
-        $actual_link = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/confirm.php?token='.$token;
+        $actual_link = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/vendor/confirm.php?token='.$token;
         $success = array();
-        mail($data['email'], 'Подтверждение почты', "Перейдите по ссылке, чтобы подтвердить свою почту: $actual_link");
+        mail($data['email'], 'Подтверждение почты', "Перейдите по ссылке, чтобы подтвердить свою почту: $actual_link", "From: studienbruecklers@snuverse.net\r\n");
         $success[] = 'Подтвердите почту';
 
     }

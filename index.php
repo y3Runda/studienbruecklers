@@ -31,9 +31,10 @@ include 'includes/header.php';
     <section class="container discussion bg-white">
         <div class="f-title"><h4><?=$discussion['title']?></h4></div>
         <div class="f-text fs-5"><?=$discussion['text']?></div>
+        <?php $number_comments = count(R::getAll('SELECT * FROM comments WHERE discussion_id = ?', [$discussion['id']])); ?>
         <?php $author = R::findOne('users', 'id = ?', [$discussion['author_id']]); ?>
         <div class="f-info d-flex justify-content-between mt-3 align-items-center">
-            <div class="f-creator"><a href="/profile.php?id=<?=$author['id']?>"><?=$author['name']?> <?=$author['surname']?></a> | <?=$discussion['cdate']?> | Комментарии: <?=$discussion['number_comments']?></div>
+            <div class="f-creator"><a href="/profile.php?id=<?=$author['id']?>"><?=$author['name']?> <?=$author['surname']?></a> | <?=$discussion['cdate']?> | Комментарии: <?=$number_comments?></div>
             <div><button class="btn btn-primary" onclick="window.location.href='/discussion.php?id=<?=$discussion['id']?>'"><i class="fas fa-comment"></i> Добавить комментарий</button></div>
         </div>
     </section>
