@@ -219,6 +219,11 @@ html, body {
     text-align: center;
 }
 
+.f-info {
+    display: flex;
+    justify-content: space-between;
+}
+
 @media (max-width: 993px) {
     .table-phone {
         display: block!important;
@@ -226,8 +231,12 @@ html, body {
     .table-pc {
         display: none!important;
     }
-
-
+    .f-info {
+        flex-direction: column;
+    }
+    .f-info button {
+        margin-top: 10px;
+    }
 }
 @media (min-width: 994px) {
     .table-phone {
