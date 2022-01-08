@@ -17,7 +17,61 @@ include 'includes/header.php';
 ?>
 
 <div class="container my-4">
-    <table class="table table-hover">
+    <div class="table-phone" style="display: none;">
+        <h2 style="margin-bottom: 20px;">Участники</h2>
+        <?php for ( $i = 0; $i < count($users); $i++ ): ?>
+            <?php if ( $users[$i]["id"] == $_SESSION['user']->id ): ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading<?php echo $users[$i]["id"]; ?>">
+                        <button class="accordion-button accordion-button-you collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $users[$i]["id"]; ?>" aria-expanded="false" aria-controls="collapse<?php echo $users[$i]["id"]; ?>">
+                            <?php echo $users[$i]["surname"] . ' ' . $users[$i]["name"]; ?>
+                        </button>
+                    </h2>
+                    <div id="collapse<?php echo $users[$i]["id"]; ?>" class="accordion-collapse collapse accordion-collapse-you" aria-labelledby="heading<?php echo $users[$i]["id"]; ?>" data-bs-parent="#accordionExample" style="">
+                        <div class="accordion-body">
+                            <p>
+                                <a href="/profile.php?id=<?php echo $users[$i]["id"]; ?>"><?php echo $users[$i]["surname"] . ' ' . $users[$i]["name"]; ?></a>
+                            </p>
+                            <p>
+                                <?php echo $users[$i]["birthdate"]; ?>
+                            </p>
+                            <p>
+                                <?php echo speuni($users[$i]["priority1"]); ?>
+                            </p>
+                            <p>
+                                <?php echo speuni($users[$i]["priority2"]); ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif ( $users[$i]["is_banned"] == 0 ): ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading<?php echo $users[$i]["id"]; ?>">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $users[$i]["id"]; ?>" aria-expanded="false" aria-controls="collapse<?php echo $users[$i]["id"]; ?>">
+                            <?php echo $users[$i]["surname"] . ' ' . $users[$i]["name"]; ?>
+                        </button>
+                    </h2>
+                    <div id="collapse<?php echo $users[$i]["id"]; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $users[$i]["id"]; ?>" data-bs-parent="#accordionExample" style="">
+                        <div class="accordion-body">
+                            <p>
+                                <a href="/profile.php?id=<?php echo $users[$i]["id"]; ?>"><?php echo $users[$i]["surname"] . ' ' . $users[$i]["name"]; ?></a>
+                            </p>
+                            <p>
+                                <?php echo $users[$i]["birthdate"]; ?>
+                            </p>
+                            <p>
+                                <?php echo speuni($users[$i]["priority1"]); ?>
+                            </p>
+                            <p>
+                                <?php echo speuni($users[$i]["priority2"]); ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endfor; ?>
+    </div>
+    <table class="table table-hover table-pc">
         <thead>
             <tr>
                 <th scope="col">Фото</th>

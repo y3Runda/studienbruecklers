@@ -218,3 +218,25 @@ html, body {
 .f-name {
     text-align: center;
 }
+
+@media (max-width: 993px) {
+    .table-phone {
+        display: block!important;
+    }
+    .table-pc {
+        display: none!important;
+    }
+
+
+}
+@media (min-width: 994px) {
+    .table-phone {
+        display: none!important;
+    }
+    .table-pc {
+        display: block!important;
+    }
+}
+/*.accordion-button-you {
+    background-color: rgba(0, 0, 0, 0.1);
+}*/
