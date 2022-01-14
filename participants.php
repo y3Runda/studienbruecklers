@@ -1,10 +1,31 @@
 <?php
 
 require 'db.php';
+$title = 'Участники';
 
 if (!isset($_SESSION['user'])) header("Location: /");
 
+if (isset($_GET['action']))
+$action = $_GET['action'];
+else $action = '';
+
+if (empty($action))
 $users = R::getAll('SELECT * FROM users ORDER BY surname ASC');
+elseif ($action == 'birthdate')
+$users = R::getAll('SELECT * FROM users ORDER BY birthdate ASC');
+else {
+    $users = [];
+    $university_id = (int)$action[10];//university
+    $students = R::getAll('SELECT * FROM users');
+    foreach ($students as $student) {
+        $priority = R::findOne('specialities', 'id = ?', [$student["priority1"]]);
+        if ($priority["university_id"] == $university_id) {
+            $users[] = $student;
+        }
+    }
+}
+
+//debug($users);
 
 function speuni($priority) {
     $spe = R::getCell('SELECT sname FROM specialities WHERE id = ?', [$priority]);
@@ -17,7 +38,56 @@ include 'includes/header.php';
 ?>
 
 <div class="container my-4">
-    <div class="table-phone" style="display: none;">
+    <div class="sort">
+
+        <h4 style="margin-bottom: 0; margin-right: 20px">Сортировать: </h4>
+
+        <ul class="nav nav-pills">
+
+            <li class="nav-item">
+                <?php
+                    if(empty($action)) echo '<a class="nav-link active" href="/participants.php">Все</a>';
+                    else echo '<a class="nav-link" href="/participants.php">Все</a>';
+                ?>
+            </li>
+            <li class="nav-item">
+                <?php
+                    if ($action == 'birthdate') echo '<a class="nav-link active" href="/participants.php?action=birthdate">Дата рождения</a>';
+                    else echo '<a class="nav-link" href="/participants.php?action=birthdate">Дата рождения</a>';
+                ?>
+            </li>
+            <li class="nav-item dropdown">
+                <?php
+                    if (!($action == 'birthdate') && !(empty($action)))
+                        echo '<a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Университет</a>';
+                    else
+                        echo '<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Университет</a>';
+                ?>
+                <div class="dropdown-menu" style="">
+                    <?php $universities = R::getAll('SELECT * FROM universities');  ?>
+                    <?php foreach ($universities as $university): ?>
+                    <?php
+                        $num_students = 0;
+                        $students = R::getAll('SELECT * FROM users');
+                        foreach ($students as $student) {
+                            $priority = $student['priority1'];
+                            $s = R::findOne('specialities', 'id = ?', [$priority]);
+                            if ($s["university_id"] == $university["id"]) {
+                                $num_students++;
+                            }
+                        }
+                    ?>
+                    <a class="dropdown-item" href="/participants.php?action=university<?php echo $university["id"]; ?>"><?php echo $university['uname']; ?> <span class="badge bg-primary rounded-pill"><?php echo $num_students; ?></span></a>
+                    <?php endforeach; ?>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+<div class="container my-4">
+    <div class="table-phone accordion" id="accordionExample">
         <h2 style="margin-bottom: 20px;">Участники</h2>
         <?php for ( $i = 0; $i < count($users); $i++ ): ?>
             <?php if ( $users[$i]["id"] == $_SESSION['user']->id ): ?>

@@ -2,6 +2,7 @@
 
 require 'db.php';
 $did = $_GET['id'];
+$title = 'Дискуссия ' . $did;
 $discussion = R::findOne('discussions', 'id = ?', [$did]);
 if (empty($discussion)) {
     header('Location: /');

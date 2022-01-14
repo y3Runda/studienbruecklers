@@ -16,4 +16,5 @@ function debug($str) {
     exit;
 }
 
+date_default_timezone_set('Europe/Kiev');
 session_start();

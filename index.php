@@ -1,6 +1,7 @@
 <?php 
 
 require 'db.php';
+$title = 'Главная страница';
 include 'includes/header.php';
 
 ?>
@@ -34,8 +35,8 @@ include 'includes/header.php';
         <?php $number_comments = count(R::getAll('SELECT * FROM comments WHERE discussion_id = ?', [$discussion['id']])); ?>
         <?php $author = R::findOne('users', 'id = ?', [$discussion['author_id']]); ?>
         <div class="f-info mt-3 align-items-center">
-            <div class="f-creator"><a href="/profile.php?id=<?=$author['id']?>"><?=$author['name']?> <?=$author['surname']?></a> | <?=$discussion['cdate']?> | Комментарии: <?=$number_comments?></div>
-            <div><button class="btn btn-primary" onclick="window.location.href='/discussion.php?id=<?=$discussion['id']?>'"><i class="fas fa-comment"></i> Добавить комментарий</button></div>
+            <div class="f-creator"><a href="/profile.php?id=<?=$author['id']?>"><?=$author['name']?> <?=$author['surname']?></a> | <?=$discussion['cdate']?></div>
+            <div><button class="btn btn-primary" onclick="window.location.href='/discussion.php?id=<?=$discussion['id']?>'"><i class="fas fa-comment"></i> Добавить комментарий (<?=$number_comments?>)</button></div>
         </div>
     </section>
     <?php endforeach; ?>

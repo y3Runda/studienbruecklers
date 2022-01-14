@@ -150,7 +150,7 @@ html, body {
 .about #telegram_social {
     margin-right: 20px;
 }
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .under-text {
         flex-direction: column;
     }
@@ -224,12 +224,18 @@ html, body {
     justify-content: space-between;
 }
 
-@media (max-width: 993px) {
+.sort {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (max-width: 993px) {
     .table-phone {
-        display: block!important;
+        display: block;
     }
     .table-pc {
-        display: none!important;
+        display: none;
     }
     .f-info {
         flex-direction: column;
@@ -238,14 +244,24 @@ html, body {
         margin-top: 10px;
     }
 }
-@media (min-width: 994px) {
+@media screen and (min-width: 994px) {
     .table-phone {
         display: none!important;
     }
     .table-pc {
-        display: block!important;
+        display: table;
     }
 }
 /*.accordion-button-you {
     background-color: rgba(0, 0, 0, 0.1);
 }*/
+
+@media screen and (max-width: 768px) {
+    .sort {
+        flex-direction: column;
+    }
+    .sort h4 {
+        margin-right: 0!important;
+        margin-bottom: 10px!important;
+    }
+}
